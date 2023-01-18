@@ -2,7 +2,7 @@
 
 Boys (and girls), the plan is simple.
 
-All Java developers, without exceptions, must be bullied. These developers usually show a sign of miserable lifestyle and severe and unhealthy liking to Rust (even though they have not ever written a single proper project in Rust).
+All [Java developer](https://github.com/justchokingaround)s, without exceptions, must be bullied. These developers usually show a sign of miserable lifestyle and severe and unhealthy liking to Rust (even though they have not ever written a single proper project in Rust).
 
 ## Working of the bully
 
@@ -18,9 +18,9 @@ And if the timer expires, it sends the message and bullies the target when they 
 
 ## Why does this work?
 
-Do you think Java developers like to code in Java? The moment they're reminded that while they are coding in Java, people are coding much more better projects in much more powerful languages, they snap.
+Do you think [Java developer](https://github.com/justchokingaround)s like to code in Java? The moment they're reminded that while they are coding in Java, people are coding much more better projects in much more powerful languages, they snap.
 
-The bully waits for its prey like a tiger. It waits for the prey to be alone. The bully sends only after the prey, who is desperate to be noticed thinks they got a reply to whatever lifeless things they talked about. The prey gets excited and selects the channel, thinking someone finally gave them their time, but unbeknownst to them, it is the bully. It is you. It is the destroyer of all Java developers.
+The bully waits for its prey like a tiger. It waits for the prey to be alone. The bully sends only after the prey, who is desperate to be noticed thinks they got a reply to whatever lifeless things they talked about. The prey gets excited and selects the channel, thinking someone finally gave them their time, but unbeknownst to them, it is the bully. It is you. It is the destroyer of all [Java developer](https://github.com/justchokingaround)s.
 
 ## Setting up
 
