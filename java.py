@@ -116,12 +116,13 @@ class TheJavaBully:
 
         for message in messages_deque.copy():
             if message["id"] == message_id:
-                messages_deque[channel_id].remove(message)
+                messages_deque.remove(message)
 
         if messages_deque and messages_deque[0]["author"]["id"] in self.targets:
             return await self.watch(channel_id)
 
-        return await self.unwatch(channel_id)
+        if channel_id in self.targets_channels:
+            return await self.unwatch(channel_id)
 
 
 async def setup_heartbeat(ws: aiohttp.ClientWebSocketResponse, interval):
