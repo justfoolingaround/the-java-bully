@@ -125,9 +125,12 @@ class TheJavaBully:
             return await self.unwatch(channel_id)
 
 
-async def setup_heartbeat(ws: aiohttp.ClientWebSocketResponse, interval):
+async def setup_heartbeat(
+    ws: aiohttp.ClientWebSocketResponse, interval, sequence: asyncio.LifoQueue
+):
     while not ws.closed:
-        await ws.send_json({"op": 1, "d": None})
+        data = await sequence.get()
+        await ws.send_json({"op": 1, "d": data})
         await asyncio.sleep(interval / 1000)
 
 
@@ -152,22 +155,26 @@ async def ws_connect(
         },
         max_msg_size=0,
     ) as ws:
+
+        is_bot = token.startswith("Bot ")
+
         await ws.send_json(
             {
                 "op": 2,
                 "d": {
                     "token": token,
                     "capabilities": capabilities,
-                    "properties": CLIENT_PROPERTIES,
-                },
+                }
+                | ({} if is_bot else {"properties": CLIENT_PROPERTIES}),
             }
         )
 
         data = await ws.receive_json()
 
         heartbeat_interval = data["d"]["heartbeat_interval"]
+        sequence = asyncio.LifoQueue()
 
-        loop.create_task(setup_heartbeat(ws, heartbeat_interval))
+        loop.create_task(setup_heartbeat(ws, heartbeat_interval, sequence))
 
         async for msg in ws:
             data = msg.json()
@@ -188,6 +195,8 @@ async def ws_connect(
                                 }
                             )
                         )
+
+            await sequence.put(data["s"])
 
 
 async def main(loop: asyncio.AbstractEventLoop = None):
