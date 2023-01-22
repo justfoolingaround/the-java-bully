@@ -163,7 +163,7 @@ async def ws_connect(
                 "op": 2,
                 "d": {
                     "token": token,
-                    "capabilities": capabilities,
+                    "intents" if is_bot else "capabilities": capabilities,
                 }
                 | ({} if is_bot else {"properties": CLIENT_PROPERTIES}),
             }
