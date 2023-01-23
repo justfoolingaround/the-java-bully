@@ -12,11 +12,11 @@ TOKEN = os.getenv("TOKEN")
 
 assert TOKEN, "TOKEN environment variable is not set."
 
-CAPABILITIES = 1 << 9
+CAPABILITIES = 1 << 9 | 1 << 12
 
 
 DISCORD_WS_URL = "wss://gateway.discord.gg/"
-DISCORD_VERSION = 9
+DISCORD_VERSION = "9"
 DISCORD_API_URL = f"https://discord.com/api/v{DISCORD_VERSION}/"
 CLIENT_PROPERTIES = {
     "os": "Windows",
@@ -143,7 +143,7 @@ async def ws_connect(
     *,
     discord_ws_url=DISCORD_WS_URL,
     capabilities=CAPABILITIES,
-    version=DISCORD_VERSION,
+    version: str = DISCORD_VERSION,
 ):
     bully = TheJavaBully(session, token, message, wait_time, targets=JAVA_DEVELOPERS)
 
@@ -164,8 +164,8 @@ async def ws_connect(
                 "d": {
                     "token": token,
                     "intents" if is_bot else "capabilities": capabilities,
-                }
-                | ({} if is_bot else {"properties": CLIENT_PROPERTIES}),
+                },
+                "properties": CLIENT_PROPERTIES,
             }
         )
 
@@ -199,7 +199,7 @@ async def ws_connect(
             await sequence.put(data["s"])
 
 
-async def main(loop: asyncio.AbstractEventLoop = None):
+async def main(loop: "asyncio.AbstractEventLoop | None" = None):
     loop = loop or asyncio.get_event_loop()
 
     async with aiohttp.ClientSession() as session:
